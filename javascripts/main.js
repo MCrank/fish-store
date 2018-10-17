@@ -1,11 +1,22 @@
 // Filter fish that are "on sale"
 
 // Add fish to "Basket"
+const discount = 0.12;
+
+const applySale = () => {
+  $('.on-sale').each((i, fish) => {
+    const fullPrice = $(fish).find('.price');
+    const salePrice = (parseInt(fullPrice.html()) * (1 - discount)).toFixed(2);
+    fullPrice.html(salePrice);
+    console.log(fullPrice.html);
+  });
+};
 
 $.get('../db/fishes.json')
   .done(data => {
     console.log(data);
     writeFishes(data.fishes);
+    applySale();
   })
   .fail(error => {
     console.error({ error });
@@ -15,7 +26,7 @@ const writeFishes = arrayOfFishes => {
   let newString = '';
   arrayOfFishes.forEach(fish => {
     newString += `
-    <div class="${fish.onSale ? 'on-sale' : ''}fish card col-md-6 col-md-offset-3">
+    <div class="${fish.onSale ? 'on-sale' : ''} fish card col-md-6 col-md-offset-3">
       <div class="thumbnail">
         <img src="${fish.imageSoure}" alt="" width="40%">
         <div class="caption">
