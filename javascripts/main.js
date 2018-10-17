@@ -15,7 +15,7 @@ const writeFishes = arrayOfFishes => {
   let newString = '';
   arrayOfFishes.forEach(fish => {
     newString += `
-    <div class="${fish.onSale ? 'on-sale' : ''}on-sale fish card col-md-6 col-md-offset-3">
+    <div class="${fish.onSale ? 'on-sale' : ''}fish card col-md-6 col-md-offset-3">
       <div class="thumbnail">
         <img src="${fish.imageSoure}" alt="" width="40%">
         <div class="caption">
@@ -58,3 +58,17 @@ const removeButtonEvents = () => {
     bindEvents();
   });
 };
+
+$('#show-sale').click(() => {
+  // Grab all of the divs with class 'fish', give me just the ones without the class 'on-sale'
+  $('.fish')
+    .not('.on-sale')
+    .toggle();
+  $('#show-sale').text((i, text) => {
+    if (text === 'Show Sale Fish') {
+      return 'Show All Fish';
+    } else {
+      return 'Show Sale Fish';
+    }
+  });
+});
