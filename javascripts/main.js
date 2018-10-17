@@ -43,5 +43,18 @@ const bindEvents = () => {
       .text('Remove from Basket')
       .addClass('remove')
       .removeClass('add');
+    removeButtonEvents();
+  });
+};
+
+const removeButtonEvents = () => {
+  $('.remove').on('click', e => {
+    const fishToRemove = $(e.target).closest('.fish');
+    $('#available').append(fishToRemove);
+    $(e.target)
+      .text('Add To Basket')
+      .addClass('add')
+      .removeClass('remove');
+    bindEvents();
   });
 };
